@@ -21,4 +21,36 @@ public class StudentList {
                 .orElse(null);
     }
 
+    public static Student getStudentByIdV1(int id) {
+
+        Student student1 = students.stream()
+                .filter(student -> student.getId() == id)
+                .findFirst()
+                .orElse(null);
+        if (student1 == null) throw new RuntimeException("Student Not Found");
+
+        return student1;
+    }
+
+    public static Student getStudentByIdV2(int id) throws Exception {
+
+        Student student1 = students.stream()
+                .filter(student -> student.getId() == id)
+                .findFirst()
+                .orElse(null);
+        if (student1 == null) throw new Exception("Student Not Found");
+
+        return student1;
+    }
+
+    public static Optional<Student> getStudentByIdV3(int id) {
+
+        Student student1 = students.stream()
+                .filter(student -> student.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        return student1 == null ? Optional.empty() : Optional.of(student1);
+    }
+
 }

@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class StudentList {
@@ -26,31 +27,26 @@ public class StudentList {
         Student student1 = students.stream()
                 .filter(student -> student.getId() == id)
                 .findFirst()
-                .orElse(null);
-        if (student1 == null) throw new RuntimeException("Student Not Found");
+                .orElseThrow(()->new RuntimeException("Student Not Found"));
 
         return student1;
     }
 
-    public static Student getStudentByIdV2(int id) throws Exception {
+    public static Student getStudentByIdV2(int id) throws NoSuchElementException {
 
         Student student1 = students.stream()
                 .filter(student -> student.getId() == id)
                 .findFirst()
-                .orElse(null);
-        if (student1 == null) throw new Exception("Student Not Found");
+                .orElseThrow(()->new NoSuchElementException("Student Not Found"));
 
         return student1;
     }
 
     public static Optional<Student> getStudentByIdV3(int id) {
 
-        Student student1 = students.stream()
+        return students.stream()
                 .filter(student -> student.getId() == id)
-                .findFirst()
-                .orElse(null);
-
-        return student1 == null ? Optional.empty() : Optional.of(student1);
+                .findFirst();
     }
 
 

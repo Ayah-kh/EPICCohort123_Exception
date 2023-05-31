@@ -24,22 +24,19 @@ public class StudentList {
 
     public static Student getStudentByIdV1(int id) {
 
-        Student student1 = students.stream()
+        return students.stream()
                 .filter(student -> student.getId() == id)
                 .findFirst()
-                .orElseThrow(()->new RuntimeException("Student Not Found"));
+                .orElseThrow(() -> new RuntimeException("Student Not Found"));
 
-        return student1;
     }
 
     public static Student getStudentByIdV2(int id) throws NoSuchElementException {
 
-        Student student1 = students.stream()
+        return students.stream()
                 .filter(student -> student.getId() == id)
                 .findFirst()
-                .orElseThrow(()->new NoSuchElementException("Student Not Found"));
-
-        return student1;
+                .orElseThrow(() -> new NoSuchElementException("Student Not Found"));
     }
 
     public static Optional<Student> getStudentByIdV3(int id) {
@@ -48,6 +45,5 @@ public class StudentList {
                 .filter(student -> student.getId() == id)
                 .findFirst();
     }
-
 
 }
